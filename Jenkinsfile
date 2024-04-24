@@ -20,6 +20,13 @@ Entregables:
 - Captura de la consola de Jenkins
 
 */
+                    def numero1 = 100
+                    def numero2 = 100
+                    def suma = numero1+numero2
+                    def resta = numero1-numero2
+                    def mult = numero1*numero2
+                    def div = numero1 / numero2
+                    def string = "Informo por consola los valores, suma: " + suma + " , resta: " + resta + " , multiplicacion:" +mult + " y la division es: " + div
 pipeline
 {
     agent any
@@ -36,13 +43,6 @@ pipeline
             {
                 script
                 {
-                    def numero1 = 100
-                    def numero2 = 100
-                    def suma = numero1+numero2
-                    def resta = numero1-numero2
-                    def mult = numero1*numero2
-                    def div = numero1 / numero2
-                    def string = "Informo por consola los valores, suma: " + suma + " , resta: " + resta + " , multiplicacion:" +mult + " y la division es: " + div
                     println string
                 }
             }
