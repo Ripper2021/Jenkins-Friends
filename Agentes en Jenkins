@@ -1,0 +1,48 @@
+pipeline
+{
+    agent none
+    
+    stages
+    {
+        stage("Build")
+        {
+            agent
+            {
+                label 'linux'
+            }
+            
+            steps
+            {
+                sh 'mvn clean install'
+            }
+        }
+        
+        stage("Test en Kubernetes")
+        {
+            agent
+            {
+                kubernetes
+                {
+                    label 'kube'
+                    defaultContainer 'maven'
+                }
+            }
+            steps
+            {
+                sh 'mvn verify'
+            }
+        }
+        
+        stage("Deploy en Windows")
+        {
+            agent
+            {
+                label 'windows'
+            }
+            steps
+            {
+                bat 'mvn deploy'
+            }
+        }
+    }
+}
