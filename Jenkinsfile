@@ -1,4 +1,3 @@
-/*
 Ejercicio 3: 
 En tu repositorio de Github debes tener al menos 3 ramas: master, desarrollo y UAT. 
 Las cuales deben ser iguales. Dentro de la rama de desarrollo se debe generar un Jenkinsfile que haga lo siguiente:
