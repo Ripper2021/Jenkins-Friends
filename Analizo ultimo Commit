@@ -1,0 +1,53 @@
+def variable_tiempo = new Date()
+pipeline
+{
+    agent any
+    
+    tools
+    {
+        maven 'Maven'
+    }
+    
+    stages
+    {
+        stage ("Analizo el repositorio")
+        {
+            steps
+            {
+                script
+                {
+                    git branch: "desarrollo", url: "https://github.com/Ripper2021/Jenkins-Friends.git"
+                    
+                }
+            }
+        }
+        
+        stage("Analizo el estado del commit")
+        {
+            steps
+            {
+                script
+                {
+                    def commitID = bat(script: "git rev-parse HEAD", returnStdout: true).trim()
+                    writeFile("commits_git.txt", text: commitID)
+                    echo "El ide del commit mas reciente es: ${commitID}"
+                }
+            }
+        }
+        stage("Comandos de MVN")
+        {
+            when
+            {
+                equals(actual:dia, expected:1)
+            }
+            steps
+            {
+                script
+                {
+                    bat 'mvn clean install'
+                }
+            }
+        }
+        
+}
+}
